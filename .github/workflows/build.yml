@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:   # 手动触发也可以！
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,13 +17,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential cmake qtbase5-dev qttools5-dev-tools libqt5networkauth5-dev libssl-dev
+          sudo apt install -y build-essential cmake qtbase5-dev qttools5-dev-tools libqt5networkauth5-dev libssl-dev libqt5dbus5 libqt5dbus5-dev qt5-qmake
 
       - name: Build project
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake
+          cmake .. -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake -DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
           make -j$(nproc)
 
       - name: Upload artifact
@@ -31,4 +31,3 @@ jobs:
         with:
           name: trojan-qt5-binary
           path: build/trojan-qt5
-
