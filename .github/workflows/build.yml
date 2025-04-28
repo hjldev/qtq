@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential cmake qtbase5-dev libqt5networkauth5-dev qttools5-dev-tools libssl-dev
+          sudo apt install -y build-essential cmake qtbase5-dev qttools5-dev-tools libqt5networkauth5-dev libssl-dev libqt5dbus5 libqt5dbus5-dev
 
       - name: Build project
         run: |
